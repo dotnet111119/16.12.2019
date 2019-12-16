@@ -1,1 +1,1 @@
-# nugget System.Data.SQLite
+# * nugget System.Data.SQLite
