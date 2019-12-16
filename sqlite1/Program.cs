@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Linq;
@@ -19,19 +19,22 @@ namespace _1612
             {
                 con.Open();
 
-                SQLiteCommand cmd = new SQLiteCommand("SELECT * FROM COMPANY", con);
-
-                SQLiteDataReader reader = cmd.ExecuteReader();
-
-                while (reader.Read())
+                using (SQLiteCommand cmd = new SQLiteCommand("SELECT * FROM COMPANY", con))
                 {
-                    Console.WriteLine(
-                        $"{reader.GetValue(0)}, {reader.GetValue(1)}, {reader.GetValue(2)}, {reader.GetValue(3)}, {reader.GetValue(4)}");
+
+                    using (SQLiteDataReader reader = cmd.ExecuteReader())
+                    {
+
+                        while (reader.Read())
+                        {
+                            Console.WriteLine(
+                                $"{reader.GetValue(0)}, {reader.GetValue(1)}, {reader.GetValue(2)}, {reader.GetValue(3)}, {reader.GetValue(4)}");
+                        }
+                    }
+                    //reader.Close();
                 }
 
-                reader.Close();
-
-                cmd.Dispose();
+                //cmd.Dispose();
             }
             //con.Close(); // happen always because of te using
 
